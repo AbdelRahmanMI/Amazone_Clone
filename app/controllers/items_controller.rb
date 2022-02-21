@@ -1,6 +1,14 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: %i[ show edit update destroy ]
 
+
+  def delete_attachment
+    @image = ActiveStorage::Attachment.find(params[:id])
+    @image.purge
+    redirect_to items_url
+  end
+  
+
   # GET /items or /items.json
   def index
     @items = Item.all
@@ -67,6 +75,6 @@ class ItemsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def item_params
-      params.require(:item).permit(:title, :price)
+      params.require(:item).permit(:title, :price , :cover , images:[])
     end
 end

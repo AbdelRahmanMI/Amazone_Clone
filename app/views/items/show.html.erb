@@ -1,5 +1,18 @@
 <p style="color: green"><%= notice %></p>
 
+<% if @item.cover.representable? %>
+  <%= image_tag(@item.cover, size: "200x200") %>
+  <%= link_to "Delete", delete_attachment_items_path(@item.cover.id) %>
+<% end %>
+
+
+<% @item.images.each do |i| %>
+ <% if i.representable? %>
+  <%= image_tag(i, size: "200x200") %> 
+  <%= link_to "Delete", delete_attachment_items_path(i) %>
+ <% end %>
+<% end %>
+
 <%= render @item %>
 
 <div>

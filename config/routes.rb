@@ -5,4 +5,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+
+  get "delete/:id", to: "items#delete_attachment", as: "delete_attachment_items"
 end
