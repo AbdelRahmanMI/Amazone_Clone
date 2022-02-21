@@ -25,7 +25,8 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-        ItemMailer.with(item: @item).new_item_email.deliver_later
+        #ItemMailer.with(item: @item).new_item_email.deliver_later
+        SendMailDailyJob.perform_later(@item)
         format.html { redirect_to item_url(@item), notice: "Item was successfully created." }
         format.json { render :show, status: :created, location: @item }
       else
